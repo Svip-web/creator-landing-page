@@ -142,6 +142,22 @@ blockquote:nth-of-type(3n+2){transform:translateY(18px);background:#ffffff0a}blo
   .figma-description{width:90%;font-size:9px!important}
   .figma-person{height:51%;bottom:-8%}.figma-lera{left:-29%}.figma-tikhon{right:-31%;height:50%}
 }
+
+/* Figma proportion correction: frame 47:228. */
+@media(min-width:1101px){
+  .figma-hero-people{z-index:4}
+  .figma-person{bottom:-70%;height:93%;transform:scale(1.55)}
+  .figma-lera{left:-12%}
+  .figma-tikhon{right:-12%;height:91%}
+  .figma-lera{transform-origin:left bottom}
+  .figma-tikhon{transform-origin:right bottom}
+  .figma-hero-copy{width:min(100%,1180px)}
+  .figma-hero h1{font-family:Creator,Georgia,'Times New Roman',serif;font-size:clamp(205px,16.5vw,270px);line-height:.68;letter-spacing:-.035em;margin-bottom:25px}
+  .figma-subtitle{width:min(100%,1050px)}
+  .figma-subtitle h2{font-family:Creator,Georgia,'Times New Roman',serif;font-size:clamp(42px,3.65vw,50px);line-height:.92}
+  .figma-subtitle h2 span{max-width:none}
+  .figma-description{width:min(100%,520px);font-size:12px!important}
+}
 /* Second screen: readable copy with a layered event-photo composition. */
 .block-2{background:#ede3d5;padding-top:95px;padding-bottom:95px}.block-2:before{display:none}.block-2 .document-copy{display:block}.block-2 .about-title{max-width:1020px;font-size:clamp(34px,4.3vw,64px);line-height:1.08;text-wrap:balance;margin-bottom:52px}
 .about-story{display:grid;grid-template-columns:1.05fr 1fr;gap:7%;align-items:start}.about-text{min-width:0}.about-text>p:first-child{font:400 23px/1.5 Georgia,serif;color:#541a29;margin-top:0}.about-text>p:nth-child(2){font-size:15px;color:#725a5c}.about-text>p:nth-child(3){font-size:12px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-top:32px;color:#501125}.about-text .doc-bullet{font-size:14px;margin:0;padding:12px 0 12px 24px;border-bottom:1px solid #54203216;line-height:1.6;position:relative}.about-text .doc-bullet:before{display:block;content:'';width:5px;height:5px;background:#a57d48;border-radius:50%;position:absolute;left:3px;top:22px}.about-text>p:last-child{font:italic 21px/1.5 Georgia,serif;color:#571328;border-left:2px solid #a9824e;padding-left:22px;margin:29px 0 0}
