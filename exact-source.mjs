@@ -16,9 +16,14 @@ function renderLine(line,i){
 function renderSection(n,content){
   const source=n===13?content.split('Да, давай закроем хвост сайта')[0].trim():content;
   const ls=lines(source);
+  if(n===1)return renderHero(ls);
   return `<section class="document-section block-${n}" id="block-${n}" data-block="${n}"><div class="block-mark">${String(n).padStart(2,'0')}</div><div class="document-copy">${layout(n,ls)}</div>${media(n)}</section>`;
 }
 
+function renderHero(ls){
+return '<section class="document-section block-1 art-hero" id="block-1" data-block="1"><div class="hero-layout"><div class="document-copy hero-copy"><div class="hero-info">'+renderLine(ls[0],0)+renderLine(ls[1],1)+'</div><h1>'+esc(ls[2])+'</h1><h2 class="hero-subtitle">'+esc(ls[3])+'</h2><p class="hero-byline">'+esc(ls[4])+'</p><div class="hero-bottom"><p class="hero-description">'+esc(ls[5])+'</p>'+renderLine(ls[7],7)+'</div></div><div class="hero-art" aria-hidden="true"><div class="hero-orbit"></div><div class="hero-art-frame"><img class="art-backdrop" src="assets/hero-background-only.png" alt=""><img class="art-person art-lera" src="assets/lera-cutout.png" alt=""><img class="art-person art-tikhon" src="assets/tikhon-cutout.png" alt=""></div><span class="art-cross">✳</span></div></div><a class="hero-scroll" href="#block-2" aria-label="CREATOR — ЭТО БОЛЬШЕ, ЧЕМ ОБУЧАЮЩАЯ ПРОГРАММА"><span aria-hidden="true">↓</span></a></section>';
+}
+function header(){return '<header class="site-header"><a class="brand" href="#block-1">CREATOR</a><nav aria-label="Навигация"><a href="#block-7">Лера Рума × Тихон Беляев</a><a href="#block-9">Программа CREATOR</a><a href="#block-14">Форматы участия <span aria-hidden="true">↗</span></a></nav></header>'}
 function layout(n,ls){
   if(n===7){const split=ls.indexOf('ТИХОН БЕЛЯЕВ');return [ls.slice(0,split),ls.slice(split)].map((part,i)=>'<article class="mentor"><div class="mentor-image"><img loading="lazy" src="assets/'+(i?'tikhon-belyaev-portrait.jpg':'lera-avatar.png')+'" alt=""></div><div>'+part.map(renderLine).join('')+'</div></article>').join('')}
   if(n===3){return ls.map((line,i)=>i>0&&line.startsWith('«')?'<blockquote>'+esc(line)+'</blockquote>':renderLine(line,i)).join('')}
@@ -40,5 +45,6 @@ function media(n){
 }
 export function buildExactDocumentSite(sections){
   const ordered=Array.from({length:17},(_,i)=>renderSection(i+1,sections[i+1]||'' )).join('');
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="assets/hero-background-only.png" as="image"><link rel="stylesheet" href="exact.css"><script src="exact.js" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${ordered}</main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="assets/hero-background-only.png" as="image"><link rel="stylesheet" href="exact.css"><script src="exact.js" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div>${header()}<main>${ordered}</main></body></html>`;
 }
+
