@@ -13,3 +13,17 @@ Created using the built-in ImageGen tool from the previous site's mentor photo. 
 ## Prompt
 
 Use case: identity-preserve. Asset type: premium beauty business mentorship website hero photograph, wide landscape 1536x1024. Input image 1 is the edit target: real mentors Lera Ruma (woman left in white suit) and Tikhon Belyaev (man right in black shirt). Preserve their exact recognizable faces, facial features, hairstyle, skin texture, expressions and original clothes; no beautification, no new people. Transform composition into a high-end editorial studio campaign: show both people standing close together from hips up, BOTH on the RIGHT 60% of wide image, with comfortable headroom and heads fully visible. Keep left 40% mostly empty for later HTML text. Replace only the pale background with dramatic deep oxblood burgundy satin drapery, soft sculptural folds and subtle warm golden rim light. Rich red luminous highlights, deep almost-black wine shadows, real photographic skin, striking fashion magazine mood, premium cinematic depth, tasteful not gaudy. Remove the existing cursive names entirely. NO text, NO lettering, NO watermark, NO UI. The people's identity must remain faithful to the supplied reference. Woman remains white suit and man remains black shirt. The background reaches all edges, no borders.
+
+## Separate first-screen assets
+
+Created with built-in ImageGen and saved as three independent layers:
+
+- `dist/assets/hero-background-only.png` — 1536×1024 opaque background.
+- `dist/assets/lera-cutout.png` — 1024×1536 transparent cutout.
+- `dist/assets/tikhon-cutout.png` — 1024×1536 transparent cutout.
+
+Background prompt: Wide 1536×1024 luxury editorial background only, dramatic deep oxblood burgundy satin drapery with large sculptural folds, warm red highlights and almost-black wine shadows, cinematic depth, no people, no silhouettes, no text, no logos, no watermark, full-bleed.
+
+Lera prompt: Transparent-background full-body cutout of Lera Ruma from the supplied mentor reference, exact recognizable face and hairstyle, white tailored suit and white shoes, standing editorial pose, clean natural edge, realistic photography, no background, no floor, no shadow plate, no text, no logo, no other person.
+
+Tikhon prompt: Transparent-background full-body cutout of Tikhon Belyaev from the supplied mentor reference, exact recognizable face, short dark hair and beard, black shirt, black trousers and black shoes, standing relaxed editorial pose, clean natural edge, realistic photography, no background, no floor, no shadow plate, no text, no logo, no other person.

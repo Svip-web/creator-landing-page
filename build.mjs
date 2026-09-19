@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {composeEditorial} from './composition.mjs';
+import {buildExactDocumentSite} from './exact-source.mjs';
 const source=fs.readFileSync(new URL('./source-content.txt',import.meta.url),'utf8').replace(/\r/g,'');
 const sections={}; for(const m of source.matchAll(/БЛОК (\d+)\.[^\n]*\n([\s\S]*?)(?=БЛОК \d+\.|$)/g)) sections[+m[1]]=m[2].trim();
 sections[13]=sections[13].split('Да, давай')[0].trim();
@@ -58,5 +59,5 @@ polished=polished.replace('<div class="modules">',`<div class="program-layout"><
 polished=polished.replace('<div class="program-note">','</div><div class="program-note">');
 polished=polished.replace('<div class="outcomes">','<div class="outcomes"><div class="outcome-statement"><span>ВАША НОВАЯ ТОЧКА</span><strong>Из хаоса<br>в <em>систему.</em></strong><span class="statement-arrow" aria-hidden="true">↗</span></div>');
 polished=polished.replace('<footer>','<footer><button class="motion-toggle" type="button" aria-pressed="false">Пауза анимации</button>');
-fs.writeFileSync(new URL('./dist/index.html',import.meta.url),composeEditorial(polished));
+fs.writeFileSync(new URL('./dist/index.html',import.meta.url),buildExactDocumentSite(sections));
 console.log(JSON.stringify({sections:Object.keys(sections).length,modules:modules.length,faq:faq.length,tasks:tasks.length,plans:3}));
