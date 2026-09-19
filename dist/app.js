@@ -20,3 +20,14 @@ let scrollQueued=false;
 function updateReadingProgress(){const height=document.documentElement.scrollHeight-innerHeight;document.documentElement.style.setProperty('--progress',height>0?String(Math.min(1,scrollY/height)):'0');scrollQueued=false;}
 addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateReadingProgress);}},{passive:true});
 addEventListener('resize',updateReadingProgress);updateReadingProgress();
+// Scroll-linked photo movement; no scroll hijacking or continuous RAF loop.
+const photoScenes=[...document.querySelectorAll('[data-photo-scene]')];
+const activeScenes=new Set();
+if('IntersectionObserver' in window){const sceneObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)activeScenes.add(entry.target);else activeScenes.delete(entry.target);}),{rootMargin:'120px'});photoScenes.forEach(scene=>sceneObserver.observe(scene));}
+function animatePhotoScenes(){
+  if(reduced.matches||document.body.classList.contains('motion-paused'))return;
+  activeScenes.forEach(scene=>{const rect=scene.getBoundingClientRect();const progress=Math.max(-1,Math.min(1,(innerHeight/2-rect.top-rect.height/2)/(innerHeight/2+rect.height/2)));scene.style.setProperty('--scene-turn',`${progress*5}deg`);scene.querySelectorAll('[data-depth]').forEach(photo=>{photo.style.setProperty('--photo-y',`${progress*Number(photo.dataset.depth)*(innerWidth<700?.55:1)}px`);});});
+}
+let photoFrame=false;
+function queuePhotoMotion(){if(!photoFrame){photoFrame=true;requestAnimationFrame(()=>{animatePhotoScenes();photoFrame=false;});}}
+addEventListener('scroll',queuePhotoMotion,{passive:true});addEventListener('resize',queuePhotoMotion);motion.addEventListener('click',queuePhotoMotion);queuePhotoMotion();

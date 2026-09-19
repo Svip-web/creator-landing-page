@@ -1,5 +1,13 @@
 # Hero image
 
+## Additional atmospheric images
+
+Created with built-in ImageGen for the photography-led revision. These are fictional atmospheric illustrations, not photos of the mentors' real businesses. Saved as `dist/assets/beauty-studio.png` and `dist/assets/work-table.png`.
+
+Studio prompt: Original cinematic editorial photograph, portrait 1024×1536, anonymous high-end beauty studio with a sculptural burgundy salon chair, arched mirror, walnut, red velvet, cream stone and warm golden light. Off-center composition with layered architectural depth. No people, text, logos or watermarks; not attributed to a real brand.
+
+Worktable prompt: Original realistic editorial photograph, portrait 1024×1536, diagonal overhead close-up of an open blank notebook, metal hair scissors, black comb, laptop corner and glass espresso on burgundy leather. Golden side light, rich shadows, asymmetric composition. Blank pages, no readable text, branding, people, hands or watermarks.
+
 Created using the built-in ImageGen tool from the previous site's mentor photo. Saved as `dist/assets/hero-cinematic.png`.
 
 ## Prompt
