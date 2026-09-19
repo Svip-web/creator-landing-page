@@ -7,6 +7,8 @@ function renderLine(line,i){
   if(buttonLabels.has(line)) return `<a class="doc-button" href="#block-14">${esc(line)}</a>`;
   if(/^—/.test(line)) return `<p class="doc-bullet">${esc(line)}</p>`;
   if(/^(Стоимость|СТАРТ|Старт программы|Длительность программы|ДЛИТЕЛЬНОСТЬ|ФОРМАТ|КОЛИЧЕСТВО МЕСТ):/.test(line)) return `<p class="doc-meta">${esc(line)}</p>`;
+  if(line==='CREATOR') return `<h1>${esc(line)}</h1>`;
+  if(i===0) return `<h2>${esc(line)}</h2>`;
   if(line===line.toUpperCase()&&/[А-ЯЁ]/.test(line)) return `<h3>${esc(line)}</h3>`;
   if(i===0) return `<h2>${esc(line)}</h2>`;
   return `<p>${esc(line)}</p>`;
@@ -14,12 +16,24 @@ function renderLine(line,i){
 function renderSection(n,content){
   const source=n===13?content.split('Да, давай закроем хвост сайта')[0].trim():content;
   const ls=lines(source);
-  return `<section class="document-section block-${n}" id="block-${n}" data-block="${n}"><div class="block-mark">${String(n).padStart(2,'0')}</div><div class="document-copy">${ls.map(renderLine).join('')}</div>${media(n)}</section>`;
+  return `<section class="document-section block-${n}" id="block-${n}" data-block="${n}"><div class="block-mark">${String(n).padStart(2,'0')}</div><div class="document-copy">${layout(n,ls)}</div>${media(n)}</section>`;
 }
+
+function layout(n,ls){
+  if(n===7){const split=ls.indexOf('ТИХОН БЕЛЯЕВ');return [ls.slice(0,split),ls.slice(split)].map((part,i)=>'<article class="mentor"><div class="mentor-image"><img loading="lazy" src="assets/'+(i?'tikhon-belyaev-portrait.jpg':'lera-avatar.png')+'" alt=""></div><div>'+part.map(renderLine).join('')+'</div></article>').join('')}
+  if(n===3){return ls.map((line,i)=>i>0&&line.startsWith('«')?'<blockquote>'+esc(line)+'</blockquote>':renderLine(line,i)).join('')}
+  const pattern=n===4?/^ЗАДАЧА \d+/:([2,8,9,10].includes(n)?/^\d{2}\. /:null);
+  if(!pattern)return ls.map(renderLine).join('');
+  let out='',group=null;
+  const flush=()=>{if(!group)return;out+=n===9?'<details class="module"><summary>'+esc(group[0])+'<span aria-hidden="true">+</span></summary><div class="module-body">'+group.slice(1).map(renderLine).join('')+'</div></details>':'<article class="editorial-card">'+group.map(renderLine).join('')+'</article>';group=null};
+  for(let i=0;i<ls.length;i++){if(pattern.test(ls[i])){flush();group=[ls[i]]}else if(group)group.push(ls[i]);else out+=renderLine(ls[i],i)}flush();return out;
+}
+
 function media(n){
   if(n===1)return `<div class="hero-media" aria-hidden="true"><img class="hero-bg" src="assets/hero-background-only.png" alt=""><img class="hero-person hero-lera" src="assets/lera-cutout.png" alt=""><img class="hero-person hero-tikhon" src="assets/tikhon-cutout.png" alt=""></div>`;
   if(n===6)return `<div class="document-photo photo-wide" aria-hidden="true"><img src="assets/hero-duo-extended.jpg" alt=""></div>`;
-  if(n===7)return `<div class="document-photo-grid" aria-hidden="true"><img src="assets/lera-avatar.png" alt=""><img src="assets/tikhon-belyaev-portrait.jpg" alt=""></div>`;
+  if(n===7)return '';
+  if(n===700)return `<div class="document-photo-grid" aria-hidden="true"><img src="assets/lera-avatar.png" alt=""><img src="assets/tikhon-belyaev-portrait.jpg" alt=""></div>`;
   if(n===9)return `<div class="document-photo photo-tall" aria-hidden="true"><img src="assets/speaker-finance-event.jpg" alt=""></div>`;
   if(n===12)return `<div class="document-photo photo-wide" aria-hidden="true"><img src="assets/lera-event-audience.png" alt=""></div>`;
   return '';
