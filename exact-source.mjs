@@ -25,6 +25,7 @@ return '<section class="document-section block-1 art-hero" id="block-1" data-blo
 }
 function header(){return '<header class="site-header"><a class="brand" href="#block-1">CREATOR</a><nav aria-label="Навигация"><a href="#block-7">Лера Рума × Тихон Беляев</a><a href="#block-9">Программа CREATOR</a><a href="#block-14">Форматы участия <span aria-hidden="true">↗</span></a></nav></header>'}
 function layout(n,ls){
+  if(n===2)return renderAbout(ls);
   if(n===7){const split=ls.indexOf('ТИХОН БЕЛЯЕВ');return [ls.slice(0,split),ls.slice(split)].map((part,i)=>'<article class="mentor"><div class="mentor-image"><img loading="lazy" src="assets/'+(i?'tikhon-belyaev-portrait.jpg':'lera-avatar.png')+'" alt=""></div><div>'+part.map(renderLine).join('')+'</div></article>').join('')}
   if(n===3){return ls.map((line,i)=>i>0&&line.startsWith('«')?'<blockquote>'+esc(line)+'</blockquote>':renderLine(line,i)).join('')}
   const pattern=n===4?/^ЗАДАЧА \d+/:([2,8,9,10].includes(n)?/^\d{2}\. /:null);
@@ -34,6 +35,12 @@ function layout(n,ls){
   for(let i=0;i<ls.length;i++){if(pattern.test(ls[i])){flush();group=[ls[i]]}else if(group)group.push(ls[i]);else out+=renderLine(ls[i],i)}flush();return out;
 }
 
+function renderAbout(ls){
+  const first=ls.findIndex(l=>/^01\. /.test(l));
+  const features=ls.slice(first,-1);let cards='';
+  for(let i=0;i<features.length;i+=2){cards+='<article class="about-feature"><div class="feature-symbol symbol-'+(i/2)+'" aria-hidden="true"><i></i><i></i><i></i></div><h3>'+esc(features[i])+'</h3><p>'+esc(features[i+1])+'</p></article>'}
+  return '<h2 class="about-title">'+esc(ls[0])+'</h2><div class="about-story"><div class="about-text">'+ls.slice(1,first).map((l,i)=>renderLine(l,i+1)).join('')+'</div><div class="about-collage" aria-hidden="true"><div class="collage-line"></div><figure class="collage-audience"><img loading="lazy" src="assets/lera-event-audience.png" alt=""></figure><figure class="collage-speaker"><img loading="lazy" src="assets/lera-stage-talk.png" alt=""></figure><span class="collage-star">✳</span></div></div><div class="about-features">'+cards+'</div><div class="about-finale"><span aria-hidden="true">↗</span><p>'+esc(ls.at(-1))+'</p></div>';
+}
 function media(n){
   if(n===1)return `<div class="hero-media" aria-hidden="true"><img class="hero-bg" src="assets/hero-background-only.png" alt=""><img class="hero-person hero-lera" src="assets/lera-cutout.png" alt=""><img class="hero-person hero-tikhon" src="assets/tikhon-cutout.png" alt=""></div>`;
   if(n===6)return `<div class="document-photo photo-wide" aria-hidden="true"><img src="assets/hero-duo-extended.jpg" alt=""></div>`;
