@@ -1289,6 +1289,17 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
   }
 }
 
+/* Mobile resource navigation sits below the cards. */
+@media(max-width:620px){
+  .block-11 .document-copy{display:flex;flex-direction:column}
+  .block-11 .resource-heading{display:contents}
+  .block-11 .resource-heading>div:first-child{order:1;margin-bottom:28px}
+  .block-11 .resource-slider{order:2}
+  .block-11 .resource-dots{order:3}
+  .block-11 .resource-controls{order:4;margin:18px 0 0}
+  .block-11 .resource-controls button{width:44px;height:44px}
+}
+
 /* Block 7: rounded mentor role labels. */
 .block-7 .mentor-content h3{display:inline-block;border-radius:999px;padding:7px 14px;max-width:100%}
 
