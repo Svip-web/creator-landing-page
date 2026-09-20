@@ -2426,9 +2426,9 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     height:400px;
     border-radius:150px 150px 20px 20px
   }
-  .collab-layout .collab-half img{bottom:-5%;height:98%}
-  .collab-layout .collab-europe img{right:-10%}
-  .collab-layout .collab-ukraine img{left:-10%}
+  .collab-layout .collab-half img{bottom:-10%;height:110%}
+  .collab-layout .collab-europe img{right:14%}
+  .collab-layout .collab-ukraine img{left:14%}
   .collab-layout .collab-symbol{bottom:16px;width:50px;height:50px}
   .collab-layout .collab-symbol span{font-size:30px}
   .collab-half .collab-name{bottom:14px;padding:6px 9px;font-size:8px}
