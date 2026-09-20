@@ -2352,3 +2352,9 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     text-align:center
   }
 }
+
+/* Give the classic-course introduction a clear reading hierarchy. */
+.block-5 .document-copy>p:nth-of-type(1),
+.block-5 .document-copy>p:nth-of-type(2){font-weight:400}
+.block-5 .document-copy>p:nth-of-type(1) strong,
+.block-5 .document-copy>p:nth-of-type(2) strong{font-weight:800;color:#fff4df}

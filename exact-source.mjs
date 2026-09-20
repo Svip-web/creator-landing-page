@@ -149,7 +149,9 @@ function layout(n,ls){
   if(n===5){
     const stages=ls[4].split(' → ');
     const flow=stages.map((stage,i)=>'<span class="flow-stage">'+esc(stage)+'</span>'+(i<stages.length-1?'<span class="flow-separator"> → </span>':'')).join('');
-    return ls.slice(0,4).map(renderLine).join('')+'<div class="living-flow" aria-label="'+esc(ls[4])+'">'+flow+'<i class="flow-glow" aria-hidden="true"></i></div>';
+    const introOne=esc(ls[1]).replace('десятков записанных уроков','<strong>десятков записанных уроков</strong>').replace('когда-нибудь посмотреть','<strong>когда-нибудь посмотреть</strong>');
+    const introTwo=esc(ls[2]).replace('живая практическая программа','<strong>живая практическая программа</strong>').replace('работой над вашим проектом','<strong>работой над вашим проектом</strong>');
+    return renderLine(ls[0],0)+'<p>'+introOne+'</p><p>'+introTwo+'</p>'+renderLine(ls[3],3)+'<div class="living-flow" aria-label="'+esc(ls[4])+'">'+flow+'<i class="flow-glow" aria-hidden="true"></i></div>';
   }
   if(n===6){
     const tagline=esc(ls[1]).replace('ДВА ПРЕДПРИНИМАТЕЛЯ. ','<span>ДВА ПРЕДПРИНИМАТЕЛЯ.</span> ').replace('ДВА РЫНКА. ','<span>ДВА РЫНКА.</span> ').replace('ОДНА ИНДУСТРИЯ.','<strong>ОДНА ИНДУСТРИЯ.</strong>');
@@ -234,5 +236,5 @@ function media(n){
 export function buildExactDocumentSite(sections){
   const ordered=header()+Array.from({length:17},(_,i)=>renderSection(i+1,sections[i+1]||'' )).join('');
   const emphasized=emphasizeBodyCopy(ordered);
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-119"><script src="exact.js?v=20260920-119" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-120"><script src="exact.js?v=20260920-120" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
 }
