@@ -86,7 +86,15 @@ function layout(n,ls){
     const starts=ls.map((l,i)=>/^CREATOR(?: PRO| VIP)?$/.test(l)?i:-1).filter(i=>i>=0);
     const end=ls.indexOf('Не знаете, какой формат выбрать?');
     const tariffPhotos=['tariff-creator-v2.webp','tariff-pro-v2.webp','tariff-vip-v2.webp'];
-    return ls.slice(0,starts[0]).map(renderLine).join('')+'<div class="participation-grid">'+starts.map((s,i)=>{const part=ls.slice(s,starts[i+1]??end);return '<article class="participation-card tariff-'+(i+1)+'"><figure class="tariff-photo"><img src="assets/'+tariffPhotos[i]+'" alt="" loading="lazy" decoding="async"><h3 class="participation-name">'+esc(part[0])+'</h3></figure><div class="participation-card-body"><details class="participation-details" open><summary>'+esc(part[1])+'</summary><div>'+part.slice(2).map((l,j)=>renderLine(l,j+2)).join('')+'</div></details></div></article>'}).join('')+'</div><div class="participation-help">'+ls.slice(end).map((l,i)=>renderLine(l,i+1)).join('')+'</div>';
+    const highlights=[[],[
+      'работать со своими задачами вместе с ментором',
+      'персональную обратную связь',
+      'помощь во внедрении',
+      'куратор-ментор проекта',
+      'сопровождает его на протяжении всей программы',
+      'Входит всё из тарифа CREATOR'
+    ],[]];
+    return ls.slice(0,starts[0]).map(renderLine).join('')+'<div class="participation-grid">'+starts.map((s,i)=>{const part=ls.slice(s,starts[i+1]??end);const body=part.slice(2).map((l,j)=>{let rendered=renderLine(l,j+2);highlights[i].forEach(phrase=>rendered=rendered.replace(phrase,'<strong>'+phrase+'</strong>'));return rendered}).join('');return '<article class="participation-card tariff-'+(i+1)+'"><figure class="tariff-photo"><img src="assets/'+tariffPhotos[i]+'" alt="" loading="lazy" decoding="async"><h3 class="participation-name">'+esc(part[0])+'</h3></figure><div class="participation-card-body"><details class="participation-details" open><summary>'+esc(part[1])+'</summary><div>'+body+'</div></details></div></article>'}).join('')+'</div><div class="participation-help">'+ls.slice(end).map((l,i)=>renderLine(l,i+1)).join('')+'</div>';
   }
   if(n===7){
     const split=ls.indexOf('ТИХОН БЕЛЯЕВ');
@@ -225,5 +233,5 @@ function media(n){
 export function buildExactDocumentSite(sections){
   const ordered=header()+Array.from({length:17},(_,i)=>renderSection(i+1,sections[i+1]||'' )).join('');
   const emphasized=emphasizeBodyCopy(ordered);
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-113"><script src="exact.js?v=20260920-113" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-114"><script src="exact.js?v=20260920-114" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
 }

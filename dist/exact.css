@@ -2244,3 +2244,6 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     letter-spacing:-.015em
   }
 }
+
+/* CREATOR PRO: make its practical advantages easy to scan. */
+.block-14 .tariff-2 .participation-details p strong{font-weight:800;color:#57101e}
