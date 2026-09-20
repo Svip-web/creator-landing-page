@@ -2405,3 +2405,33 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
   }
   .block-2 .about-caption:before{flex-basis:24px;width:24px}
 }
+
+/* Separate the speakers and label the collaboration portrait. */
+.collab-half .collab-name{
+  position:absolute;
+  z-index:5;
+  bottom:20px;
+  padding:7px 11px;
+  border:1px solid #e8ca9466;
+  border-radius:999px;
+  background:#2b050dcc;
+  color:#f0d49b;
+  font:700 10px/1 Inter,Arial,sans-serif;
+  letter-spacing:.12em
+}
+.collab-europe .collab-name{left:20px}
+.collab-ukraine .collab-name{right:20px}
+@media(max-width:620px){
+  .collab-layout .collab-stage{
+    height:400px;
+    border-radius:150px 150px 20px 20px
+  }
+  .collab-layout .collab-half img{bottom:-5%;height:98%}
+  .collab-layout .collab-europe img{right:-10%}
+  .collab-layout .collab-ukraine img{left:-10%}
+  .collab-layout .collab-symbol{bottom:16px;width:50px;height:50px}
+  .collab-layout .collab-symbol span{font-size:30px}
+  .collab-half .collab-name{bottom:14px;padding:6px 9px;font-size:8px}
+  .collab-europe .collab-name{left:12px}
+  .collab-ukraine .collab-name{right:12px}
+}
