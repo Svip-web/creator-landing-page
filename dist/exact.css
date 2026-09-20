@@ -2366,3 +2366,42 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     line-height:1.16
   }
 }
+
+/* Replace the heavy caption pill with a restrained editorial divider. */
+.block-2 .about-caption{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:12px;
+  width:auto;
+  max-width:none;
+  margin:30px 0 22px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#e8ca94;
+  font-size:13px!important;
+  font-weight:700;
+  line-height:1.35;
+  letter-spacing:.1em;
+  text-align:left;
+  text-transform:uppercase
+}
+.block-2 .about-caption:before{
+  content:'';
+  flex:0 0 30px;
+  width:30px;
+  height:1px;
+  background:#e8ca94
+}
+@media(max-width:620px){
+  .block-2 .about-caption{
+    width:auto;
+    margin:26px 0 20px;
+    padding:0;
+    font-size:12px!important;
+    white-space:nowrap
+  }
+  .block-2 .about-caption:before{flex-basis:24px;width:24px}
+}
