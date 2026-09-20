@@ -2187,3 +2187,16 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
   65%{transform:translateY(0) scale(1);box-shadow:0 0 0 4px #e5c58118}
 }
 @media(prefers-reduced-motion:reduce){.block-14 .doc-bullet:before{animation:none!important;transform:none}}
+
+/* Keep tariff CTA labels on one line on mobile. */
+@media(max-width:650px){
+  .block-14 .participation-details .doc-button{
+    min-height:60px;
+    padding:13px 16px;
+    gap:10px;
+    white-space:nowrap;
+    letter-spacing:0;
+    font-size:16px!important
+  }
+  .block-14 .participation-details .doc-button:after{font-size:21px}
+}
