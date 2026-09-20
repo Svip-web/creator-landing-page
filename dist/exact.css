@@ -1238,6 +1238,11 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
 .block-7 .mentor-experience .doc-bullet{padding-left:30px}
 .block-7 .mentor-experience .source-dash{display:none}
 .block-7 .mentor-experience .doc-bullet:before{content:'✓';display:block;left:2px;top:12px;width:auto;height:auto;background:none;color:#9b6f37;font:700 16px/1.35 Inter,Arial,sans-serif}
+.block-7.visible .mentor-experience .doc-bullet:before{animation:mentor-check-soft 2.8s ease-in-out infinite}
+.block-7.visible .mentor-experience .doc-bullet:nth-child(2n):before{animation-delay:-.9s}
+.block-7.visible .mentor-experience .doc-bullet:nth-child(3n):before{animation-delay:-1.8s}
+@keyframes mentor-check-soft{0%,100%{transform:translateY(0) scale(1);opacity:.72}45%{transform:translateY(-2px) scale(1.08);opacity:1}65%{transform:translateY(0) scale(1);opacity:.88}}
+@media(prefers-reduced-motion:reduce){.block-7 .mentor-experience .doc-bullet:before{animation:none!important;transform:none;opacity:1}}
 
 /* Block 7: rounded mentor role labels. */
 .block-7 .mentor-content h3{display:inline-block;border-radius:999px;padding:7px 14px;max-width:100%}
