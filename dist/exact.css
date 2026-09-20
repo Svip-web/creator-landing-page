@@ -1551,7 +1551,7 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
 .block-8 .audience-number{display:none}
 .block-8 .audience-finale{font-size:20px!important}
 @media(max-width:620px){
-  .block-8 .audience-finale{grid-template-columns:38px minmax(0,1fr);gap:15px;padding:21px 18px;font-size:17px}
+  .block-8 .audience-finale{grid-template-columns:1fr;justify-items:start;gap:14px;padding:22px 20px;font-size:17px}
   .block-8 .audience-finale:before{width:38px;height:38px}
 }
 
