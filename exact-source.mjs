@@ -1,5 +1,14 @@
 const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const lines=s=>s.replace(/\r/g,'').split('\n').map(x=>x.trim()).filter(Boolean);
+const importancePattern=/(сильн(?:ая|ой|ую|ые|ых)?\s+команд\p{L}*|жив\p{L}*\s+практическ\p{L}*\s+программ\p{L}*|работ\p{L}*\s+над\s+(?:вашим|своим)\s+проект\p{L}*|личн\p{L}*\s+бренд\p{L}*|финанс\p{L}*|маркетинг\p{L}*|клиент\p{L}*|команд\p{L}*|управлен\p{L}*|систем\p{L}*|практическ\p{L}*|результат\p{L}*|стратег\p{L}*|план\p{L}*)/giu;
+function emphasizeBodyCopy(html){
+  return html.replace(/<(p|blockquote)([^>]*)>([^<]*)<\/\1>/g,(whole,tag,attrs,text)=>{
+    if(/doc-meta|figma-byline|program-label|chat-counter/.test(attrs))return whole;
+    let accents=0;
+    const highlighted=text.replace(importancePattern,match=>accents++<2?'<strong>'+match+'</strong>':match);
+    return '<'+tag+attrs+'>'+highlighted+'</'+tag+'>';
+  });
+}
 const buttonLabels=new Set(['ПРИСОЕДИНИТЬСЯ К CREATOR','ВЫБРАТЬ CREATOR','ВЫБРАТЬ CREATOR PRO','ВЫБРАТЬ CREATOR VIP','ПОЛУЧИТЬ КОНСУЛЬТАЦИЮ','ВЫБРАТЬ ФОРМАТ УЧАСТИЯ']);
 function renderLine(line,i){
   if(/^КНОПКА:?$/i.test(line)||/^Кнопка:?$/i.test(line)) return '';
@@ -202,5 +211,6 @@ function media(n){
 }
 export function buildExactDocumentSite(sections){
   const ordered=header()+Array.from({length:17},(_,i)=>renderSection(i+1,sections[i+1]||'' )).join('');
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-97"><script src="exact.js?v=20260920-97" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${ordered}</main></body></html>`;
+  const emphasized=emphasizeBodyCopy(ordered);
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-98"><script src="exact.js?v=20260920-98" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
 }

@@ -136,6 +136,20 @@ blockquote:nth-of-type(3n+2){transform:translateY(18px);background:#ffffff0a}blo
   .figma-hero-bg img{object-position:center}
 }
 
+/* Consistent emphasis in body copy on every viewport. */
+main p strong,main blockquote strong{font-weight:700;color:inherit}
+
+/* Final mobile alignment for the classic-course section. */
+@media(max-width:620px){
+  .block-5,
+  .block-5 .document-copy,
+  .block-5 .document-copy>*{
+    margin-left:0!important;
+    margin-right:0!important;
+    text-align:left!important
+  }
+}
+
 /* Mobile section headings share a compact scale and keep their intended hierarchy. */
 @media(max-width:620px){
   .block-2 .about-title,
