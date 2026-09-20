@@ -2270,3 +2270,16 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     margin-bottom:var(--mobile-heading-gap)
   }
 }
+
+/* Compact mobile resource subtitle. */
+@media(max-width:620px){
+  .block-11 .resource-heading h3{
+    max-width:320px;
+    font-family:Inter,Arial,sans-serif;
+    font-size:21px!important;
+    font-weight:600;
+    line-height:1.3;
+    letter-spacing:-.015em;
+    text-wrap:balance
+  }
+}
