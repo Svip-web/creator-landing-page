@@ -1979,6 +1979,16 @@ blockquote:nth-of-type(3n+2){transform:translateY(18px);background:#ffffff0a}blo
   .figma-lera{left:-38px;height:680px}
   .figma-tikhon{right:-44px;height:665px;bottom:-265px}
 }
+
+/* Compact header action on phones. */
+@media(max-width:760px){
+  .site-header .header-cta{
+    min-height:32px;
+    padding:7px 10px;
+    gap:6px;
+    font-size:10px
+  }
+}
 @media(max-width:390px){
   .figma-hero-people{height:405px}
   .figma-person{height:640px;bottom:-258px}
