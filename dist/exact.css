@@ -1994,6 +1994,23 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
   .figma-tikhon{right:-44px;height:665px;bottom:-265px}
 }
 
+/* Mobile mentor role: a clean editorial label instead of an oversized pill. */
+@media(max-width:760px){
+  .block-7 .mentor-content h3{
+    display:block;
+    width:100%;
+    max-width:none;
+    padding:2px 0 2px 14px;
+    border-left:3px solid #b88748;
+    border-radius:0;
+    background:transparent;
+    color:#67202e;
+    font-size:14px!important;
+    line-height:1.45;
+    letter-spacing:.035em
+  }
+}
+
 /* Compact header action on phones. */
 @media(max-width:760px){
   .site-header .header-cta{
