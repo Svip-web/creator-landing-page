@@ -2170,4 +2170,9 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     font-weight:500;
     line-height:1.35
   }
+  .block-12 .case-conclusion{
+    padding-top:20px;
+    font-size:16px!important;
+    line-height:1.55
+  }
 }
