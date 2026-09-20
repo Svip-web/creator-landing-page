@@ -2439,3 +2439,13 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
 /* Make the hero outcomes easy to pick out at a glance. */
 .figma-description strong{font-weight:800;color:#fff5e2}
 .figma-description strong:nth-of-type(2){color:#edcf91}
+
+/* Give the mobile hero subtitle more presence. */
+@media(max-width:620px){
+  .figma-subtitle h2{
+    font-size:clamp(25px,7vw,29px)!important;
+    line-height:1.02;
+    gap:4px
+  }
+  .figma-subtitle h2 span{padding:.03em .42em .09em}
+}
