@@ -2328,3 +2328,16 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
   }
   .block-9 .module-body{padding:0 18px 28px}
 }
+
+/* Keep the collaboration conclusion as one continuous paragraph. */
+.block-6 .collab-conclusion .collab-final{display:block}
+.block-6 .collab-conclusion .collab-final strong{font-weight:800;color:#57101e}
+@media(max-width:620px){
+  .block-6 .collab-conclusion .collab-final{
+    padding:24px 22px;
+    font-family:Inter,Arial,sans-serif;
+    font-size:17px!important;
+    font-weight:400;
+    line-height:1.55
+  }
+}
