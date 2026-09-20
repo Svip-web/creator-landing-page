@@ -2358,3 +2358,11 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
 .block-5 .document-copy>p:nth-of-type(2){font-weight:400}
 .block-5 .document-copy>p:nth-of-type(1) strong,
 .block-5 .document-copy>p:nth-of-type(2) strong{font-weight:800;color:#fff4df}
+
+/* Keep the mobile practice statement compact and easy to scan. */
+@media(max-width:620px){
+  .block-2 .about-practice>h3{
+    font-size:22px;
+    line-height:1.16
+  }
+}
