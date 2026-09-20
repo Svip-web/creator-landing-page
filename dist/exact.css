@@ -135,6 +135,15 @@ blockquote:nth-of-type(3n+2){transform:translateY(18px);background:#ffffff0a}blo
   .figma-person{height:57%;bottom:-11%}.figma-lera{left:-25%}.figma-tikhon{right:-27%;height:56%}
   .figma-hero-bg img{object-position:center}
 }
+
+/* Mobile block 5: keep the complete reading axis aligned to the left edge. */
+@media(max-width:620px){
+  .block-5{text-align:left}
+  .block-5 .document-copy>*{margin-left:0;margin-right:0}
+  .block-5 .document-copy>h2,
+  .block-5 .document-copy>p{max-width:none;text-align:left}
+  .block-5 .flow-stage{text-align:left}
+}
 @media(max-width:390px){
   .figma-hero.block-1{height:760px;min-height:760px}
   .figma-hero h1{font-size:21.5vw}
