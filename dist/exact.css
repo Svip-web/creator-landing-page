@@ -2231,3 +2231,16 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
 
 /* Final message: stronger emphasis on the key business ideas. */
 .block-17 .document-copy>p:not(.doc-meta) strong{font-weight:800;color:#fff0cf}
+
+/* Compact mobile onboarding subtitle. */
+@media(max-width:620px){
+  .block-15 .document-copy>h3{
+    max-width:310px;
+    margin:26px 0 18px;
+    font-family:Inter,Arial,sans-serif;
+    font-size:21px!important;
+    font-weight:700;
+    line-height:1.28;
+    letter-spacing:-.015em
+  }
+}
