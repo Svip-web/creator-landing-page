@@ -164,6 +164,19 @@ function layout(n,ls){
     const finale=esc(ls[10]).replace('каждый работает со своей текущей точкой и задачами бизнеса','<strong>каждый работает со своей текущей точкой и задачами бизнеса</strong>');
     return '<h2 class="audience-title">'+esc(ls[0])+'</h2><p class="audience-lead">'+esc(ls[1])+'</p><div class="audience-card-grid">'+cards+'</div><p class="audience-finale"><span>'+finale+'</span></p>';
   }
+  if(n===17){
+    const emphasis=[
+      [['Сильный бьюти-бизнес'],['хорошей услуге, сильном мастере или удачной рекламе']],
+      [['системы'],['работают на развитие бизнеса']],
+      [['практическая программа'],['на своём проекте'],['что именно нужно менять']]
+    ];
+    const body=ls.slice(2,5).map((line,i)=>{
+      let copy=esc(line);
+      emphasis[i].flat().forEach(part=>copy=copy.replace(part,'<strong>'+part+'</strong>'));
+      return '<p>'+copy+'</p>';
+    }).join('');
+    return renderLine(ls[0],0)+renderLine(ls[1],1)+body+ls.slice(5).map((line,i)=>renderLine(line,i+5)).join('');
+  }
   const pattern=n===4?/^ЗАДАЧА \d+/:([2,8,9,10].includes(n)?/^\d{2}\. /:null);
   if(!pattern)return ls.map(renderLine).join('');
   let out='',group=null;
@@ -212,5 +225,5 @@ function media(n){
 export function buildExactDocumentSite(sections){
   const ordered=header()+Array.from({length:17},(_,i)=>renderSection(i+1,sections[i+1]||'' )).join('');
   const emphasized=emphasizeBodyCopy(ordered);
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-111"><script src="exact.js?v=20260920-111" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-112"><script src="exact.js?v=20260920-112" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
 }

@@ -2228,3 +2228,6 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
 }
 @keyframes tariff-cta-shine{0%,68%{left:-34%}100%{left:122%}}
 @media(prefers-reduced-motion:reduce){.block-14 .participation-details .doc-button:before{animation:none;display:none}}
+
+/* Final message: stronger emphasis on the key business ideas. */
+.block-17 .document-copy>p:not(.doc-meta) strong{font-weight:800;color:#fff0cf}
