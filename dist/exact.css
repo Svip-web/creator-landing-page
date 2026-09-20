@@ -124,6 +124,7 @@ blockquote:nth-of-type(3n+2){transform:translateY(18px);background:#ffffff0a}blo
   .figma-hero h1{font-size:13vw}.figma-subtitle{width:72%}.figma-subtitle h2{font-size:4vw}
   .figma-description{width:48%;font-size:11px!important}
 }
+
 @media(max-width:760px){
   .figma-hero.block-1{height:820px;min-height:820px;padding:34px 5% 36px;place-items:start center;border-radius:0 0 42px 0}
   .figma-hero-copy{padding-top:0}
@@ -2158,5 +2159,15 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     text-align:center;
     font:600 16px/1 Inter,Arial,sans-serif;
     letter-spacing:.08em
+  }
+}
+
+/* Mobile case steps use a clearer, larger sans-serif label. */
+@media(max-width:620px){
+  .block-12 .case-step{
+    font-family:Inter,Arial,sans-serif;
+    font-size:18px!important;
+    font-weight:500;
+    line-height:1.35
   }
 }
