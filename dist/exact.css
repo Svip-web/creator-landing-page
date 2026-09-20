@@ -1274,8 +1274,8 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
     grid-area:title;
     width:auto;
     padding-right:0;
-    font-size:20px!important;
-    line-height:1.12
+    font-size:17px!important;
+    line-height:1.18
   }
   .block-9 .module-plus{
     position:relative;
