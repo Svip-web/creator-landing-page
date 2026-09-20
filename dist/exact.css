@@ -2435,3 +2435,7 @@ main p strong,main blockquote strong{font-weight:700;color:inherit}
   .collab-europe .collab-name{left:12px}
   .collab-ukraine .collab-name{right:12px}
 }
+
+/* Make the hero outcomes easy to pick out at a glance. */
+.figma-description strong{font-weight:800;color:#fff5e2}
+.figma-description strong:nth-of-type(2){color:#edcf91}
