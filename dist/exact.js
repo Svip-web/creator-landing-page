@@ -75,6 +75,7 @@ paintFlow();
 function enforceMinimumTextSize(){
   document.querySelectorAll('main *').forEach(element=>{
     if(element.getAttribute('aria-hidden')==='true'||getComputedStyle(element).display==='none')return;
+    if(element.closest('.figma-meta'))return;
     const hasOwnText=[...element.childNodes].some(node=>node.nodeType===Node.TEXT_NODE&&node.textContent.trim());
     if(hasOwnText&&parseFloat(getComputedStyle(element).fontSize)<16)element.style.setProperty('font-size','16px','important');
   });

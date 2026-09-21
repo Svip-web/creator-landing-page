@@ -100,11 +100,16 @@ function layout(n,ls){
       'сопровождает его на протяжении всей программы',
       'Входит всё из тарифа CREATOR'
     ],[]];
-    return ls.slice(0,starts[0]).map(renderLine).join('')+'<div class="participation-grid">'+starts.map((s,i)=>{const part=ls.slice(s,starts[i+1]??end);const body=part.slice(2).map((l,j)=>{let rendered=renderLine(l,j+2);highlights[i].forEach(phrase=>rendered=rendered.replace(phrase,'<strong>'+phrase+'</strong>'));return rendered}).join('');return '<article class="participation-card tariff-'+(i+1)+'"><figure class="tariff-photo"><img src="assets/'+tariffPhotos[i]+'" alt="" loading="lazy" decoding="async"><h3 class="participation-name">'+esc(part[0])+'</h3></figure><div class="participation-card-body"><details class="participation-details" open><summary>'+esc(part[1])+'</summary><div>'+body+'</div></details></div></article>'}).join('')+'</div><div class="participation-help">'+ls.slice(end).map((l,i)=>renderLine(l,i+1)).join('')+'</div>';
+    const introDifference=esc(ls[3])
+      .replace('глубине обратной связи','<strong>глубине обратной связи</strong>')
+      .replace('количестве разборов','<strong>количестве разборов</strong>')
+      .replace('персональной работе с вашим проектом','<strong>персональной работе с вашим проектом</strong>');
+    const intro='<h2>'+esc(ls[0])+'</h2><div class="participation-intro"><h3>'+esc(ls[1])+'</h3><div class="participation-principles"><p class="participation-common"><span aria-hidden="true">✦</span>'+esc(ls[2])+'</p><p class="participation-difference">'+introDifference+'</p></div></div>';
+    return intro+'<div class="participation-grid">'+starts.map((s,i)=>{const part=ls.slice(s,starts[i+1]??end);const body=part.slice(2).map((l,j)=>{let rendered=renderLine(l,j+2);highlights[i].forEach(phrase=>rendered=rendered.replace(phrase,'<strong>'+phrase+'</strong>'));return rendered}).join('');return '<article class="participation-card tariff-'+(i+1)+'"><figure class="tariff-photo"><img src="assets/'+tariffPhotos[i]+'" alt="" loading="lazy" decoding="async"><h3 class="participation-name">'+esc(part[0])+'</h3></figure><div class="participation-card-body"><details class="participation-details" open><summary>'+esc(part[1])+'</summary><div>'+body+'</div></details></div></article>'}).join('')+'</div><div class="participation-help">'+ls.slice(end).map((l,i)=>renderLine(l,i+1)).join('')+'</div>';
   }
   if(n===7){
     const split=ls.indexOf('ТИХОН БЕЛЯЕВ');
-    return [ls.slice(0,split),ls.slice(split)].map((part,i)=>{const firstBullet=part.findIndex(x=>x.startsWith('—'));const closing=part.at(-1);const intro=part.slice(2,firstBullet);const bullets=part.slice(firstBullet,-1);return '<article class="mentor-story mentor-'+(i?'tikhon':'lera')+'"><div class="mentor-stage" aria-hidden="true"><i></i><img loading="lazy" decoding="async" src="assets/'+(i?'tikhon-cutout.webp':'lera-cutout.webp')+'" alt=""></div><div class="mentor-content"><header><h2>'+esc(part[0])+'</h2><h3>'+esc(part[1])+'</h3></header><div class="mentor-intro">'+intro.map((line,j)=>'<p class="'+(j===intro.length-1?'mentor-list-label':'')+'">'+esc(line)+'</p>').join('')+'</div><div class="mentor-experience">'+bullets.map((line,j)=>renderLine(line,j)).join('')+'</div><p class="mentor-final">'+esc(closing)+'</p></div></article>'}).join('');
+    return [ls.slice(0,split),ls.slice(split)].map((part,i)=>{const firstBullet=part.findIndex(x=>x.startsWith('—'));const closing=part.at(-1);const intro=part.slice(2,firstBullet);const bullets=part.slice(firstBullet,-1);return '<article class="mentor-story mentor-'+(i?'tikhon':'lera')+'"><div class="mentor-stage" aria-hidden="true"><i></i><img loading="lazy" decoding="async" src="assets/'+(i?'tikhon-speaker-portrait.webp':'lera-speaker-portrait.webp')+'" alt=""></div><div class="mentor-content"><header><h2>'+esc(part[0])+'</h2><h3>'+esc(part[1])+'</h3></header><div class="mentor-intro">'+intro.map((line,j)=>'<p class="'+(j===intro.length-1?'mentor-list-label':'')+'">'+esc(line)+'</p>').join('')+'</div><div class="mentor-experience">'+bullets.map((line,j)=>renderLine(line,j)).join('')+'</div><p class="mentor-final">'+esc(closing)+'</p></div></article>'}).join('');
   }
   if(n===9){
     const starts=ls.map((line,i)=>/^0[1-8]\. /.test(line)?i:-1).filter(i=>i>=0);
@@ -120,12 +125,14 @@ function layout(n,ls){
     };
     const cards=modules.map((module,i)=>{
       let group='';
+      const titleParts=module[0].match(/^(0[1-8]\.\s*)(.*)$/);
+      const moduleTitle='<span class="module-title-index">'+esc(titleParts[1])+'</span>'+esc(titleParts[2]);
       const body=module.slice(1).map((line,j)=>{
         if(moduleIcons[line]){group=line;return '<h3 class="module-section-title"><span class="module-section-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+moduleIcons[line]+'</svg></span><span>'+esc(line)+'</span></h3>'}
         const rendered=renderLine(line,j+1);
         return group==='ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ'&&rendered.startsWith('<p>')?rendered.replace('<p>','<p class="doc-bullet module-material-item">'):rendered;
       }).join('');
-      return '<details class="module module-product"><summary><span class="module-object object-'+(i+1)+'" data-index="'+String(i+1).padStart(2,'0')+'" data-label="'+mockupLabels[i]+'" aria-hidden="true"><i class="mockup-back"></i><i class="mockup-face"><img src="assets/'+mockupPhotos[i]+'" alt="" loading="lazy" decoding="async"><b></b></i><i class="mockup-edge"></i></span><span class="module-title">'+esc(module[0])+'</span><span class="module-plus" aria-hidden="true">+</span></summary><div class="module-body">'+body+'</div></details>';
+      return '<details class="module module-product"><summary><span class="module-object object-'+(i+1)+'" data-index="'+String(i+1).padStart(2,'0')+'" data-label="'+mockupLabels[i]+'" aria-hidden="true"><i class="mockup-back"></i><i class="mockup-face"><img src="assets/'+mockupPhotos[i]+'" alt="" loading="lazy" decoding="async"><b></b></i><i class="mockup-edge"></i></span><span class="module-title">'+moduleTitle+'</span><span class="module-plus" aria-hidden="true">+</span></summary><div class="module-body">'+body+'</div></details>';
     }).join('');
     const programStages=intro[4].split(' → ');
     const programFlow=programStages.map((stage,i)=>'<span class="program-stage">'+esc(stage)+'</span>'+(i<programStages.length-1?'<span class="program-arrow" aria-hidden="true"> → </span>':'')).join('');
@@ -155,9 +162,10 @@ function layout(n,ls){
   if(n===5){
     const stages=ls[4].split(' → ');
     const flow=stages.map((stage,i)=>'<span class="flow-stage">'+esc(stage)+'</span>'+(i<stages.length-1?'<span class="flow-separator"> → </span>':'')).join('');
+    const sectionTitle=esc(ls[0]).replace('CREATOR','<strong>CREATOR</strong>').replace('НЕ КЛАССИЧЕСКИЙ ОНЛАЙН-КУРС','<strong>НЕ КЛАССИЧЕСКИЙ ОНЛАЙН-КУРС</strong>');
     const introOne=esc(ls[1]).replace('десятков записанных уроков','<strong>десятков записанных уроков</strong>').replace('когда-нибудь посмотреть','<strong>когда-нибудь посмотреть</strong>');
     const introTwo=esc(ls[2]).replace('живая практическая программа','<strong>живая практическая программа</strong>').replace('работой над вашим проектом','<strong>работой над вашим проектом</strong>');
-    return renderLine(ls[0],0)+'<p>'+introOne+'</p><p>'+introTwo+'</p>'+renderLine(ls[3],3)+'<div class="living-flow" aria-label="'+esc(ls[4])+'">'+flow+'<i class="flow-glow" aria-hidden="true"></i></div>';
+    return '<h2>'+sectionTitle+'</h2><p>'+introOne+'</p><p>'+introTwo+'</p>'+renderLine(ls[3],3)+'<div class="living-flow" aria-label="'+esc(ls[4])+'">'+flow+'<i class="flow-glow" aria-hidden="true"></i></div>';
   }
   if(n===6){
     const tagline=esc(ls[1]).replace('ДВА ПРЕДПРИНИМАТЕЛЯ. ','<span>ДВА ПРЕДПРИНИМАТЕЛЯ.</span> ').replace('ДВА РЫНКА. ','<span>ДВА РЫНКА.</span> ').replace('ОДНА ИНДУСТРИЯ.','<strong>ОДНА ИНДУСТРИЯ.</strong>');
@@ -242,5 +250,5 @@ function media(n){
 export function buildExactDocumentSite(sections){
   const ordered=header()+Array.from({length:17},(_,i)=>renderSection(i+1,sections[i+1]||'' )).join('');
   const emphasized=emphasizeBodyCopy(ordered);
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-126"><script src="exact.js?v=20260920-126" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#360710"><title>CREATOR — Лера Рума × Тихон Беляев</title><meta name="description" content="Практическая программа для бьюти-предпринимателей"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2352141f'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Georgia' font-size='47' fill='%23ecd9b5'%3EC%3C/text%3E%3C/svg%3E"><link rel="preload" href="assets/creator.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/hero-stage-screen-audience.webp" as="image" type="image/webp" fetchpriority="high"><link rel="stylesheet" href="exact.css?v=20260920-153"><script src="exact.js?v=20260920-153" defer></script></head><body><div class="reading-progress" aria-hidden="true"></div><main>${emphasized}</main></body></html>`;
 }
